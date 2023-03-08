@@ -1,32 +1,32 @@
 import styled from 'styled-components'
 
 export const VideoCard = styled.li`
-  list-style-type: none;
+  width: 85vw;
   display: flex;
-  flex-direction: column;
-  width: 30%;
-  margin-right: 20px;
-  margin-bottom: 20px;
+  flex-direction: row;
+  margin-bottom: 24px;
   @media (max-width: 576px) {
-    width: 100%;
-    margin-right: 0;
+    width: 100vw;
+    flex-direction: column;
   }
 `
 export const Thumbnail = styled.img`
-  width: 100%;
+  width: 350px;
+  @media (max-width: 576px) {
+    width: 100%;
+  }
 `
 export const VideoDetail = styled.div`
-  margin-top: 10px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  margin-left: 24px;
+  @media (max-width: 576px) {
+    margin-top: 14px;
+    margin-left: 5px;
+  }
 `
 export const VideoDetailTextContent = styled.div`
   color: ${props => (props.isDarkTheme ? '#ffffff' : '#000')};
-`
-export const ChannelLogo = styled.img`
-  width: 40px;
-  align-self: flex-start;
-  margin-right: 10px;
 `
 export const ViewsAndTime = styled.div`
   display: flex;
@@ -48,7 +48,4 @@ export const ChannelName = styled.p`
 `
 export const ViewsText = styled.p`
   margin-right: 0px;
-`
-export const DateText = styled.p`
-  font-size: 14px;
 `

@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const MainContainer = styled.div`
+  min-height: 93vh;
   display: flex;
   flex-direction: row;
 `
@@ -9,6 +10,7 @@ export const HomeRouteContainer = styled.div`
   flex-direction: column;
 `
 export const VideoBannerContainer = styled.div`
+  overflow-x: auto;
   width: 85vw;
   display: flex;
   flex-direction: column;
@@ -59,11 +61,12 @@ export const CloseButton = styled.button`
   cursor: pointer;
 `
 export const VideosContainer = styled.div`
+  min-height: 93vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #f9f9f9;
+  background-color: ${props => (props.isDarkTheme ? '#181818' : '#f9f9f9')};
   padding: 24px;
   @media (max-width: 576px) {
     padding: 0;
@@ -108,4 +111,61 @@ export const VideosList = styled.ul`
   flex-direction: row;
   flex-wrap: wrap;
   padding-left: 0;
+`
+export const FailureContainer = styled.div`
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+export const FailureImage = styled.img`
+  width: 40%;
+`
+export const FailureHeading = styled.h1`
+  font-size: 26px;
+  font-weight: bold;
+  color: #0f0f0f;
+`
+export const FailureDescription = styled.p`
+  width: 40%;
+  text-align: center;
+  font-size: 18px;
+  color: #475569;
+  font-weight: 500;
+  margin-top: 0;
+`
+export const RetryButton = styled.button`
+  background-color: #4f46e5;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+  width: 90px;
+  height: 36px;
+`
+export const NoResultsContainer = styled.div`
+  padding: 24px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
+export const NoResultImage = styled.img`
+  width: 30%;
+`
+export const NoResultHeading = styled.h1`
+  font-size: 24px;
+  font-weight: 700;
+  color: #181818;
+  margin: 0;
+`
+export const NoResultDesc = styled.p`
+  font-size: 18px;
+  font-weight: 500;
+  color: #64748b;
 `

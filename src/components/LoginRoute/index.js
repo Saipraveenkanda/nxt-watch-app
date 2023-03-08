@@ -13,6 +13,7 @@ import {
   LabelCheck,
   ErrorMsg,
 } from './loginStyling'
+import NxtWatchContext from '../../context/NxtWatchContext'
 
 class LoginRoute extends Component {
   state = {
@@ -58,7 +59,6 @@ class LoginRoute extends Component {
     }
     const response = await fetch(loginApiUrl, options)
     const data = await response.json()
-    console.log(data)
     if (response.ok === true) {
       this.onSubmitSuccess(data.jwt_token)
     } else {
@@ -73,38 +73,50 @@ class LoginRoute extends Component {
       return <Redirect to="/" />
     }
     return (
-      <LoginContainer>
-        <Form onSubmit={this.onSubmitForm}>
-          <WebsiteLogo
-            src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
-            alt="website logo"
-          />
-          <Label htmlFor="username">USERNAME</Label>
-          <InputStyle
-            type="text"
-            placeholder="Username"
-            onChange={this.onChangeUserName}
-            value={username}
-          />
-          <Label htmlFor="username">PASSWORD</Label>
-          <InputStyle
-            type={isChecked ? 'text' : 'password'}
-            placeholder="Password"
-            onChange={this.onChangePassword}
-            value={password}
-          />
-          <ShowPassCont>
-            <CheckBox
-              type="checkbox"
-              id="checkbox"
-              onChange={this.onToggleCheckbox}
-            />
-            <LabelCheck htmlFor="checkbox">Show Password</LabelCheck>
-          </ShowPassCont>
-          <LoginBtn type="submit">Login</LoginBtn>
-          {showErrorMsg && <ErrorMsg>*{errorMsg}</ErrorMsg>}
-        </Form>
-      </LoginContainer>
+      <NxtWatchContext.Consumer>
+        {value => {
+          const {isDarkTheme} = value
+          const websiteUrl = isDarkTheme
+            ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-dark-theme-img.png'
+            : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png'
+
+          return (
+            <LoginContainer isDarkTheme={isDarkTheme}>
+              <Form onSubmit={this.onSubmitForm} isDarkTheme={isDarkTheme}>
+                <WebsiteLogo src={websiteUrl} alt="website logo" />
+                <Label htmlFor="userName">USERNAME</Label>
+                <InputStyle
+                  type="text"
+                  id="userName"
+                  placeholder="Username"
+                  onChange={this.onChangeUserName}
+                  value={username}
+                />
+                <Label htmlFor="password">PASSWORD</Label>
+                <InputStyle
+                  type={isChecked ? 'text' : 'password'}
+                  placeholder="Password"
+                  onChange={this.onChangePassword}
+                  value={password}
+                  id="password"
+                />
+                <ShowPassCont>
+                  <CheckBox
+                    type="checkbox"
+                    id="checkBox"
+                    onChange={this.onToggleCheckbox}
+                  />
+                  <LabelCheck isDarkTheme={isDarkTheme} htmlFor="checkBox">
+                    Show Password
+                  </LabelCheck>
+                </ShowPassCont>
+                <LoginBtn type="submit">Login</LoginBtn>
+                {showErrorMsg && <ErrorMsg>*{errorMsg}</ErrorMsg>}
+              </Form>
+            </LoginContainer>
+          )
+        }}
+      </NxtWatchContext.Consumer>
     )
   }
 }

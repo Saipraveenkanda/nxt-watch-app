@@ -7,14 +7,19 @@ export const LoginContainer = styled.div`
   align-items: center;
   padding-left: 20px;
   padding-right: 20px;
+  background-color: ${props =>
+    props.isDarkTheme === true ? '#212121' : '#f9f9f9 '};
 `
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  box-shadow: 4px 0px 16px 0px #bfbfbfbf;
+  box-shadow: ${props =>
+    props.isDarkTheme ? 'none' : '4px 0px 16px 0px #bfbfbfbf'};
   height: 45%;
   padding-left: 32px;
   padding-right: 32px;
+  border-radius: 6px;
+  background-color: ${props => (props.isDarkTheme ? '#000000' : '#ffffff')};
 `
 export const WebsiteLogo = styled.img`
   width: 60%;
@@ -41,7 +46,7 @@ export const InputStyle = styled.input`
 `
 export const LoginBtn = styled.button`
   background-color: #3b82f6;
-  color: #fff;
+  color: #ffffff;
   font-size: 13px;
   font-weight: bold;
   border: none;
@@ -61,6 +66,7 @@ export const CheckBox = styled.input`
   margin-right: 8px;
 `
 export const LabelCheck = styled.label`
+  color: ${props => (props.isDarkTheme ? '#fff' : '#000')};
   margin-bottom: 0;
 `
 export const ErrorMsg = styled.p`

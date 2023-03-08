@@ -1,23 +1,20 @@
 import {formatDistanceToNow} from 'date-fns'
 import {Link} from 'react-router-dom'
 import {BsDot} from 'react-icons/bs'
+import NxtWatchContext from '../../context/NxtWatchContext'
 import './index.css'
-
 import {
   VideoCard,
   Thumbnail,
   VideoDetail,
-  ChannelLogo,
+  VideoDetailTextContent,
   ViewsAndTime,
   VideoTitle,
   ChannelName,
   ViewsText,
-  VideoDetailTextContent,
-  DateText,
-} from './videoStyling'
-import NxtWatchContext from '../../context/NxtWatchContext'
+} from './savedVideoStyling'
 
-const VideoItem = props => {
+const SavedVideoItem = props => {
   const {videoDetails} = props
   const {
     id,
@@ -27,7 +24,7 @@ const VideoItem = props => {
     viewCount,
     channel,
   } = videoDetails
-  const {name, profileImageUrl} = channel
+  const {name} = channel
   const formattedDate = formatDistanceToNow(new Date(publishedAt)).split(' ')[1]
 
   return (
@@ -36,38 +33,25 @@ const VideoItem = props => {
         const {isDarkTheme} = value
 
         return (
-          <VideoCard>
-            <Link to={`/videos/${id}`} className="link-style">
+          <Link to={`/videos/${id}`} className="link-style">
+            <VideoCard>
               <Thumbnail src={thumbnailUrl} alt="video thumbnail" />
               <VideoDetail>
-                <ChannelLogo src={profileImageUrl} alt="channel logo" />
                 <VideoDetailTextContent isDarkTheme={isDarkTheme}>
                   <VideoTitle isDarkTheme={isDarkTheme}>{title}</VideoTitle>
                   <ChannelName>{name}</ChannelName>
                   <ViewsAndTime>
                     <ViewsText>{viewCount} views</ViewsText>
                     <BsDot size={28} />
-                    <DateText>{formattedDate} years ago</DateText>
+                    <p>{formattedDate} years ago</p>
                   </ViewsAndTime>
                 </VideoDetailTextContent>
               </VideoDetail>
-            </Link>
-          </VideoCard>
+            </VideoCard>
+          </Link>
         )
       }}
     </NxtWatchContext.Consumer>
   )
 }
-export default VideoItem
-
-/*
-channel: {name: 'CyberEye', profileImageUrl: 'https://assets.ccbp.in/frontend/react-js/nxt-watch/cyber-eye-img.png'}
-id: "9420a07a-df83-419e-a46e-ed308103e829"
-publishedAt: "Apr 23, 2020"
-thumbnailUrl: "https://assets.ccbp.in/frontend/react-js/nxt-watch/things-conference-cyber-eye-img.png"
-title: "Avinash Dara, CyberEye | Smart Campus - A Deployment Perspective | The Things Virtual Conference"
-viewCount: "23K"
-*/
-
-/* import {formatDistanceToNow} from 'date-fns'
-console.log(formatDistanceToNow(new Date(2021, 8, 20))) */
+export default SavedVideoItem
